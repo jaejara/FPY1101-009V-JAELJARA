@@ -1,0 +1,50 @@
+# Contadores automáticos
+especialistas_senior = 0
+residentes_junior = 0
+
+# 1. Pedir cantidad de médicos a registrar
+while True:
+    try:
+        cantidad = int(input("¿Cuántos médicos desea registrar? "))
+        if cantidad > 0:
+            break
+        else:
+            print("¡Registro médico inválido! Ingresa un entero positivo para continuar.")
+    except ValueError:
+        print("¡Registro médico inválido! Ingresa un entero positivo para continuar.")
+
+# 2. Registrar cada médico
+for i in range(cantidad):
+    print(f"\n--- Registro del médico {i + 1} ---")
+
+    # Nombre profesional
+    while True:
+        nombre = input("Nombre profesional: ")
+        if len(nombre) >= 6 and " " not in nombre:
+            break
+        else:
+            print("Nombre inválido. Debe tener al menos 6 caracteres y no incluir espacios.")
+
+    # Experiencia clínica
+    while True:
+        try:
+            experiencia = int(input("Años de experiencia clínica: "))
+            if experiencia > 0:
+                break
+            else:
+                print("¡Error clínico! Ingresa un número entero positivo para la experiencia.")
+        except ValueError:
+            print("¡Error clínico! Ingresa un número entero positivo para la experiencia.")
+
+    # Clasificación del médico
+    if experiencia > 5:
+        categoria = "Especialista Senior"
+        especialistas_senior += 1
+    else:
+        categoria = "Residente Junior"
+        residentes_junior += 1
+
+    print(f"{nombre} clasificado como: {categoria}")
+
+# 3. Resumen final
+print(f"\n¡El hospital cuenta con {especialistas_senior} Especialistas Senior y {residentes_junior} Residentes Junior! ¡Sistema listo para operar!")
