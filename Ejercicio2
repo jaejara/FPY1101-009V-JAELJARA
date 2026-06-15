@@ -1,0 +1,68 @@
+# Stock inicial y variables
+stock = 120
+CAPACIDAD_MAXIMA = 120
+historial_prestamos = 0
+
+# Bienvenida
+print("¡Bienvenido al sistema de gestión de préstamos de la Biblioteca Central!")
+
+# Menú principal
+while True:
+    print("\n====MENÚ PRINCIPAL====")
+    print("1. Libros disponibles")
+    print("2. Realizar préstamo")
+    print("3. Devolver préstamo")
+    print("4. Historial de préstamos")
+    print("5. Salir")
+
+    opcion = input("\nSeleccione una opción: ")
+
+    # 1. Libros disponibles
+    if opcion == "1":
+        print(f"\nLibros disponibles actualmente: {stock}")
+
+    # 2. Realizar préstamo
+    elif opcion == "2":
+        while True:
+            try:
+                cantidad = int(input("¿Cuántos libros desea prestar? "))
+                if cantidad <= 0:
+                    print("La cantidad no puede ser menor o igual a 0.")
+                elif cantidad > stock:
+                    print(f"No hay suficientes libros disponibles. Stock actual: {stock}")
+                else:
+                    stock -= cantidad
+                    historial_prestamos += cantidad
+                    print(f"Préstamo realizado con éxito. Libros prestados: {cantidad}. Stock actual: {stock}")
+                    break
+            except ValueError:
+                print("Ingrese un número entero válido.")
+
+    # 3. Devolver préstamo
+    elif opcion == "3":
+        while True:
+            try:
+                cantidad = int(input("¿Cuántos libros desea devolver? "))
+                if cantidad <= 0:
+                    print("La cantidad debe ser mayor a 0.")
+                elif stock + cantidad > CAPACIDAD_MAXIMA:
+                    print(f"No se pueden devolver esa cantidad. Superaría la capacidad máxima de {CAPACIDAD_MAXIMA} libros.")
+                else:
+                    stock += cantidad
+                    historial_prestamos -= cantidad
+                    print(f"Devolución realizada con éxito. Libros devueltos: {cantidad}. Stock actual: {stock}")
+                    break
+            except ValueError:
+                print("Ingrese un número entero válido.")
+
+    # 4. Historial de préstamos
+    elif opcion == "4":
+        print(f"\nTotal de préstamos activos durante la sesión: {historial_prestamos}")
+
+    # 5. Salir
+    elif opcion == "5":
+        print("\nGracias por utilizar nuestro software, hasta la próxima.")
+        break
+
+    else:
+        print("Opción inválida. Por favor seleccione una opción del 1 al 5.")
